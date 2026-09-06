@@ -1,10 +1,13 @@
-import jwt from "jsonwebtoken"
-const SECRET = process.env.JWT_SECRET
+import jwt from "jsonwebtoken";
 
+const SECRET = process.env.JWT_SECRET;
+
+/** Creates a token with the given payload */
 export function createToken(payload) {
-    return jwt.sign(payload,SECRET,{expiresIn: '7d'})
+  return jwt.sign(payload, SECRET, { expiresIn: "7d" });
 }
 
-export function getToken(token) {
-    return jwt.verify(token, SECRET)
+/** Extracts the payload from a token */
+export function verifyToken(token) {
+  return jwt.verify(token, SECRET);
 }

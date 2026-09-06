@@ -1,9 +1,9 @@
 import db from "../client.js";
-import bcrypt from "bcrypt";
+import bcrypt, { hash } from "bcrypt";
 
 // Store the hashed password in case of data breach
 export async function insertUser({ username, password, role }) {
-  const SQL = `INSERT INTO users(username,password) VALUES ($1,$2,$3) RETURNING *`;
+  const SQL = `INSERT INTO users(username,password,role) VALUES($1,$2,$3) RETURNING *`;
   const hashedPassword = await bcrypt.hash(password, 10);
   const {
     rows: [user],
