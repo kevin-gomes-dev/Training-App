@@ -1,5 +1,5 @@
 import db from "../client.js";
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
 // Store the hashed password in case of data breach
 export async function insertUser({ username, password, role }) {

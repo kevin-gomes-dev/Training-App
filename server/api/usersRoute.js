@@ -1,6 +1,6 @@
 import express from "express";
 import { getUserByUsername, insertUser } from "../db/queries/users.js";
-import { createToken } from "../../utils/jwt.js";
+import { createToken } from "../../server/utils/jwt.js";
 const usersRoute = express.Router();
 export default usersRoute;
 
