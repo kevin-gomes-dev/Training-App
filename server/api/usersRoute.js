@@ -1,20 +1,24 @@
 import express from "express";
-import { insertUser } from "../db/queries/users.js";
+import { getUserByUsername, insertUser } from "../db/queries/users.js";
 import { createToken } from "../../utils/jwt.js";
 const usersRoute = express.Router();
 export default usersRoute;
 
 usersRoute.post("/register", async (req, res) => {
-  console.log("Registering...");
   const user = await insertUser({
     username: req.body.username,
     password: req.body.password,
     role: req.body.role,
   });
-  const token = createToken({ id: user.id });
-  return res.status(201).send(token);
+  return res.status(201).send(createToken({ id: user.id }));
 });
 
 usersRoute.post("/login", async (req, res) => {
-  res.status(200).send("test");
+  const user = await getUserByUsername({
+    username: req.body.username,
+    password: req.body.password,
+  });
+  if (!user) return res.status(401).send("Invalid credentials.");
+  req.user = user;
+  return res.status(200).send(createToken({ id: user.id }));
 });
