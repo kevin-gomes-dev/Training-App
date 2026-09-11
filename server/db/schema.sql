@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS users_messages CASCADE;
 DROP TABLE IF EXISTS users_videos CASCADE;
+DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS videos;
 
 CREATE TABLE users(
@@ -14,14 +13,9 @@ CREATE TABLE users(
 CREATE TABLE messages(
     id SERIAL PRIMARY KEY,
     message TEXT NOT NULL,
-    date TIMESTAMP NOT NULL
-);
-
-CREATE TABLE users_messages(
-    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
     from_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    to_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    message_id INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE
+    to_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE videos(

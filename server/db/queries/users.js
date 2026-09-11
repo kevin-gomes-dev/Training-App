@@ -23,6 +23,11 @@ export async function getUserByUsername({ username, password }) {
   return user;
 }
 
+export async function getUserIdByUsername({ username }) {
+  const SQL = `SELECT id FROM users WHERE username = $1`;
+  return (await db.query(SQL, [username])).rows[0]?.id;
+}
+
 export async function getUserById({ id }) {
   const SQL = `SELECT * FROM users WHERE id = $1`;
   const {

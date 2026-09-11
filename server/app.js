@@ -4,6 +4,7 @@ import requireBody from "./middleware/requireBody.js";
 import usersRoute from "./api/usersRoute.js";
 import messagesRoute from "./api/messagesRoute.js";
 import getUserFromToken from "./middleware/getUserFromToken.js";
+import requireAdmin from "./middleware/requireAdmin.js";
 const app = express();
 export default app;
 const JSON_PARSE_ERROR_TYPE = "entity.parse.failed";
@@ -15,8 +16,9 @@ app.use(morgan("dev"));
 app.use(getUserFromToken);
 
 app.get("/", (req, res) => res.status(200).send("Home"));
-app.use("/users", requireBody(["username", "password"]), usersRoute);
-app.use("/messages", messagesRoute);
+app.use("/users", usersRoute);
+app.use("/messages", requireAdmin, messagesRoute);
+app.use((req, res) => res.status(404).send("Route not found"));
 
 app.use((err, req, res, next) => {
   switch (err.code) {
