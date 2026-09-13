@@ -13,7 +13,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch --env-file=.env server/server.js",
-    "db:schema": "psql -d tasklist -f db/schema.sql"
+    "db:schema": "psql -d training -f server/db/schema.sql"
   },
   "repository": {
     "type": "git",

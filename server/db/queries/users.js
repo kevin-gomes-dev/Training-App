@@ -1,5 +1,5 @@
 import db from "../client.js";
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
 // Store the hashed password in case of data breach
 export async function insertUser({ username, password, role }) {
@@ -21,6 +21,11 @@ export async function getUserByUsername({ username, password }) {
   const verify = await bcrypt.compare(password, user.password);
   if (!verify) return null;
   return user;
+}
+
+export async function getUserIdByUsername({ username }) {
+  const SQL = `SELECT id FROM users WHERE username = $1`;
+  return (await db.query(SQL, [username])).rows[0]?.id;
 }
 
 export async function getUserById({ id }) {
