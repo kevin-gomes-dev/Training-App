@@ -12,8 +12,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch --env-file=.env server/server.js",
-    "db:schema": "psql -d training -f server/db/schema.sql"
+    "dev": "node --watch --env-file=.env server/index.js",
+    "db:schema": "psql -d training -f server/db/schema.sql",
+    "db:seed": "node --env-file=.env server/db/seed.js"
   },
   "repository": {
     "type": "git",
