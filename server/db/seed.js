@@ -1,5 +1,5 @@
 import db from "./client.js";
-import { getUserById, insertUser } from "./queries/users.js";
+import { insertUser } from "./queries/users.js";
 import { insertMessage } from "./queries/messages.js";
 
 await db.connect();
@@ -10,15 +10,13 @@ await db.end();
 async function seed() {
   const users = [1, 2, 3];
   for (let i of users) {
-    if (i === 0) {
-      await insertUser({
-        username: "user" + i,
-        password: "password",
-        role: "admin",
-      });
-    } else {
-      await insertUser({ username: "user" + i, password: "password" });
-    }
+    i === 1
+      ? await insertUser({
+          username: "user" + i,
+          password: "password",
+          role: "admin",
+        })
+      : await insertUser({ username: "user" + i, password: "password" });
   }
 
   // Messages
