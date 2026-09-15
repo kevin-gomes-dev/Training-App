@@ -26,14 +26,14 @@ app.use((err, req, res, next) => {
   switch (err.code) {
     // Invalid type
     case INVALID_TYPE_ERROR_CODE:
+    // PSQL cannot determine data type
+    case INDETERMINATE_DATA_TYPE_ERROR_CODE:
       return res.status(400).send(err.message);
     // Unique constraint violation
     case UNIQUE_CONSTRAINT_ERROR_CODE:
     // Foreign key violation
     case FOREIGN_KEY_ERROR_CODE:
       return res.status(400).send(err.detail);
-    case INDETERMINATE_DATA_TYPE_ERROR_CODE:
-      return res.status(400).send(err.message);
     default:
       next(err);
   }

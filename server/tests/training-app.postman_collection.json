@@ -194,7 +194,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+          "raw": "{\n\t\"username\": \"user1\",\n    \"password\": \"password\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -231,6 +231,65 @@
           "host": ["localhost"],
           "port": "3000",
           "path": ["users", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update user ADMIN",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzg5NTA1NzIxLCJleHAiOjE3OTAxMTA1MjF9.7k5hD2xhhzvP0GSdjqMn8RPhGQ9fOvLoOCRIgN6p3tk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\":\"testUpdateUser\",\n    \"password\":\"pass\",\n    \"role\":\"someRole\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/users/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "2"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete user ADMIN",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzg5NTA1ODU2LCJleHAiOjE3OTAxMTA2NTZ9.Y9oHbf-EBJOdqmZfwDeWEbA0HUMNBaFBmeBKRQah23o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/users/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "2"]
         }
       },
       "response": []
