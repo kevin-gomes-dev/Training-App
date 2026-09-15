@@ -36,18 +36,15 @@ export async function getUserById({ id }) {
   return user;
 }
 
-/** If no username, only updates password. */
-export async function updateUser({ id, username, password }) {
-  let SQL;
-  if (!username) SQL = `UPDATE users SET password = $3 WHERE id = $1`;
-  else
-    SQL = `UPDATE users SET username = $2, password = $3
-  WHERE id = $1 AND username IS DISTINCT FROM $2 RETURNING *`;
-  console.log(SQL);
+export async function updateUser({ id, username, password, role }) {
+  const SQL = `UPDATE users SET
+  username = $2,
+  password = $3,
+  role = $4 WHERE id = $1 RETURNING *`;
   const hashedPassword = await bcrypt.hash(password, 10);
   const {
     rows: [user],
-  } = await db.query(SQL, [id, username, hashedPassword]);
+  } = await db.query(SQL, [id, username, hashedPassword, role]);
   return user;
 }
 

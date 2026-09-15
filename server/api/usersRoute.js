@@ -81,7 +81,7 @@ usersRoute.get("/:id/messages/:messageId", async (req, res) => {
 
 usersRoute.use(requireBody(["username"]), async (req, res, next) => {
   const toUserId = await getUserIdByUsername({ username: req.body.username });
-  if (!toUserId) return res.status(404).send("Receiving user doesn't exist");
+  if (!toUserId) return res.status(404).send("User doesn't exist");
   req.toUserId = toUserId;
   next();
 });
