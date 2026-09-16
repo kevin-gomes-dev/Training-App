@@ -1,3 +1,5 @@
+/* Drops and creates all tables used in backend. Run using command: psql -d <database_name> -f schema.sql */
+
 DROP TABLE IF EXISTS users_videos CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS users;
