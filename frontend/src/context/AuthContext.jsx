@@ -3,11 +3,14 @@ import api from '../api/client';
 
 const AuthContext = createContext(null);
 
+//This is for the page we are protecting. It will check authentication.
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Whenever the token changes, we will update localStorage.
+  // This way, the user will stay logged in even if they refresh the page.
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
@@ -16,6 +19,8 @@ export function AuthProvider({ children }) {
     }
   }, [token]);
 
+  // The login function will call the backend to authenticate the user.
+  // If successful, it will store the token in state and localStorage.
   const login = async (username, password) => {
     setLoading(true);
     setError(null);
@@ -36,6 +41,8 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // The register function will call the backend to create a new user.
+  // If successful, it will store the token in state and localStorage.
   const register = async (username, password, role = undefined) => {
     setLoading(true);
     setError(null);
@@ -59,11 +66,14 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // The logout function will clear the token from state and localStorage.
   const logout = () => {
     setToken(null);
     setError(null);
   };
 
+  // The value provided by the AuthContext will include the token, authentication status, loading state, error state, 
+  // and the login, register, and logout functions.
   const value = {
     token,
     isAuthenticated: !!token,

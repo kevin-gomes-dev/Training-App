@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+// This component is the main dashboard page that users see after logging in.
 export default function Dashboard() {
   const { logout, token } = useAuth();
   const navigate = useNavigate();

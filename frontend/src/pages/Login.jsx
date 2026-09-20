@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+// This component is the login page where users can enter their credentials to log in.
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
