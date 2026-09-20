@@ -1,3 +1,5 @@
+/** Seeds the database with helpful data to use for testing endpoints and requests.  */
+
 import db from "./client.js";
 import { insertUser } from "./queries/users.js";
 import { insertMessage } from "./queries/messages.js";
