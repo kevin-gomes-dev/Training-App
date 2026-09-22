@@ -56,8 +56,6 @@ export async function updateUser({ id, username, password, role }) {
 /** Admin only - DELETE request to remove a user entirely. */
 export async function deleteUser({ id }) {
   const SQL = `DELETE FROM users WHERE id = $1`;
-  const {
-    rows: [user],
-  } = await db.query(SQL, [id]);
+  await db.query(SQL, [id]);
   return null;
 }

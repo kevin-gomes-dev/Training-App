@@ -17,7 +17,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzg5MDg2ODg3LCJleHAiOjE3ODk2OTE2ODd9.VjJ8qzcLUQZaYB-3Ry_tmk8-YTwiHz28kzmIpJpyPtY",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwMDM3NzY1LCJleHAiOjE3OTA2NDI1NjV9.YxdHmMdvzBLwyefNaIWvULCL7s13NeEuNC9cshy5tmo",
                   "type": "string"
                 }
               ]
@@ -51,7 +51,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzg5MDg2ODg3LCJleHAiOjE3ODk2OTE2ODd9.VjJ8qzcLUQZaYB-3Ry_tmk8-YTwiHz28kzmIpJpyPtY",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwMDM3NzY1LCJleHAiOjE3OTA2NDI1NjV9.YxdHmMdvzBLwyefNaIWvULCL7s13NeEuNC9cshy5tmo",
                   "type": "string"
                 }
               ]
@@ -68,11 +68,11 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/messages/1",
+              "raw": "http://localhost:3000/messages/4",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["messages", "1"]
+              "path": ["messages", "4"]
             }
           },
           "response": []
@@ -85,7 +85,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzg5MDg4OTI2LCJleHAiOjE3ODk2OTM3MjZ9.3Na21VrpdlXzSRdiBlD48h3n5VgBbldcqxlel_GCoo4",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwMDM3NzY1LCJleHAiOjE3OTA2NDI1NjV9.YxdHmMdvzBLwyefNaIWvULCL7s13NeEuNC9cshy5tmo",
                   "type": "string"
                 }
               ]
@@ -102,11 +102,181 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/users/messages",
+              "raw": "http://localhost:3000/users/2/messages",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["users", "messages"]
+              "path": ["users", "2", "messages"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user message",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzkwMDM3Nzk0LCJleHAiOjE3OTA2NDI1OTR9.Ywxlj_7jF4QMh_8gn48Bs2x_ox0D7DlgLVWy9M1i78E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/users/2/messages/5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["users", "2", "messages", "5"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user message",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzkwMDM3Nzk0LCJleHAiOjE3OTA2NDI1OTR9.Ywxlj_7jF4QMh_8gn48Bs2x_ox0D7DlgLVWy9M1i78E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"message\":\"Updated!\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/users/2/messages/14",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["users", "2", "messages", "14"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user message",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzkwMDM3Nzk0LCJleHAiOjE3OTA2NDI1OTR9.Ywxlj_7jF4QMh_8gn48Bs2x_ox0D7DlgLVWy9M1i78E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/users/2/messages/14",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["users", "2", "messages", "14"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Message ADMIN",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwMDM3NzY1LCJleHAiOjE3OTA2NDI1NjV9.YxdHmMdvzBLwyefNaIWvULCL7s13NeEuNC9cshy5tmo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/messages/3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["messages", "3"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update message ADMIN",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwMDM3NzY1LCJleHAiOjE3OTA2NDI1NjV9.YxdHmMdvzBLwyefNaIWvULCL7s13NeEuNC9cshy5tmo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"message\":\"Test\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/messages/3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["messages", "3"]
             }
           },
           "response": []
@@ -136,11 +306,11 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/users/messages?sent=true",
+              "raw": "http://localhost:3000/users/2/messages?sent=true",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["users", "messages"],
+              "path": ["users", "2", "messages"],
               "query": [
                 {
                   "key": "sent",
@@ -176,11 +346,11 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/users/messages",
+              "raw": "http://localhost:3000/users/2/messages",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["users", "messages"]
+              "path": ["users", "2", "messages"]
             }
           },
           "response": []
@@ -194,7 +364,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"username\": \"user1\",\n    \"password\": \"password\"\n}",
+          "raw": "{\n\t\"username\": \"user2\",\n    \"password\": \"password\"\n}",
           "options": {
             "raw": {
               "language": "json"
