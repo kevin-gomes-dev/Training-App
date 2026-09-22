@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+// This component is the registration page where new users can create an account.
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
