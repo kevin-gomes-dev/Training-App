@@ -18,6 +18,9 @@ export default function Dashboard() {
         <button onClick={handleLogout} className="btn btn-secondary">
           Sign Out
         </button>
+        <button onClick={() => navigate('/messages')} className="btn btn-secondary">
+          Messages
+        </button>
       </header>
 
       <main className="dashboard-content">
@@ -35,3 +38,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
