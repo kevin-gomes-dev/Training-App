@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
+import Messages from './pages/Messages';
 
 function AppRoutes() {
   const { isAuthenticated } = useAuth();
@@ -32,7 +33,16 @@ function AppRoutes() {
         element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
+      <Route
+  path="/messages"
+  element={
+    <ProtectedRoute>
+      <Messages />
+    </ProtectedRoute>
+  }
+  />
     </Routes>
+
   );
 }
 

@@ -83,6 +83,7 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
+    userId: getUserIdFromToken(token),
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -94,4 +95,15 @@ export function useAuth() {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
+}
+
+// Read the user id stored inside the JWT (payload only, not a security check)
+function getUserIdFromToken(token) {
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.id ?? null;
+  } catch {
+    return null;
+  }
 }
