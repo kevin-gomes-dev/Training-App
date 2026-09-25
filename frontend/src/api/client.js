@@ -1,7 +1,7 @@
 //This page is a shared API client that can be used to make requests to the backend. It handles the base URL, headers,
 //and error handling for all requests.
 
-const BASE_URL = '/api';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 function getHeaders() {
     const headers = {
@@ -36,7 +36,7 @@ async function request (method, path, body = null) {
     //If the response is not JSON, we will just return the text response.
     //This is useful for error messages that are not in JSON format.
     catch (error) {
-        data = text || 'User not found.'; //If the response is empty, this will return a generic error message.
+        data = text || 'An error has occurred.'; //If the response is empty, this will return a generic error message.
     }
 
     // Makes sure that if the response is not ok, we throw an error with the status and data
