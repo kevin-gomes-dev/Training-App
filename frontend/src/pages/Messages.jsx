@@ -53,8 +53,8 @@ export default function Messages() {
     setError(null);
     try {
       const [inboxRes, sentRes] = await Promise.all([
-        api.get('/users/messages'),
-        api.get('/users/messages?sent=true'),
+        api.get(`/users/${userId}/messages`),
+        api.get(`/users/${userId}/messages?sent=true`),
       ]);
       setInbox(Array.isArray(inboxRes.data) ? inboxRes.data : []);
       setSent(Array.isArray(sentRes.data) ? sentRes.data : []);
@@ -65,10 +65,10 @@ export default function Messages() {
     }
   };
 
-  useEffect(() => {
+    useEffect(() => {
+    if (!userId) return;
     loadMessages();
-  }, []);
-
+    }, [userId]);
   // Build one conversation per other user
   const conversations = useMemo(() => {
     const map = new Map();
@@ -144,7 +144,7 @@ export default function Messages() {
     setSending(true);
     setError(null);
     try {
-      const { data } = await api.post('/users/messages', {
+      const { data } = await api.post(`/users/${userId}/messages`, {
         username,
         message: text,
       });
