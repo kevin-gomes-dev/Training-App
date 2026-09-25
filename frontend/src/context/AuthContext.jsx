@@ -1,6 +1,16 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../api/client';
 
+function getUserIdFromToken(token) {
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.id ?? null;
+  } catch {
+    return null;
+  }
+}
+
 const AuthContext = createContext(null);
 
 //This is for the page we are protecting. It will check authentication.
@@ -98,12 +108,3 @@ export function useAuth() {
 }
 
 // Read the user id stored inside the JWT (payload only, not a security check)
-function getUserIdFromToken(token) {
-  if (!token) return null;
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.id ?? null;
-  } catch {
-    return null;
-  }
-}
