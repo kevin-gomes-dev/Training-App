@@ -8,6 +8,7 @@ import usersRoute from "./api/usersRoute.js";
 import messagesRoute from "./api/messagesRoute.js";
 import getUserFromToken from "./middleware/getUserFromToken.js";
 import requireAdmin from "./middleware/requireAdmin.js";
+import cors from "cors";
 const app = express();
 export default app;
 
@@ -17,6 +18,9 @@ const INVALID_TYPE_ERROR_CODE = "22P02";
 const UNIQUE_CONSTRAINT_ERROR_CODE = "23505";
 const FOREIGN_KEY_ERROR_CODE = "23503";
 const INDETERMINATE_DATA_TYPE_ERROR_CODE = "42P18";
+
+// For the deployed backend
+app.use(cors({ origin: process.env.API_URL }));
 
 // Important middleware used by all routes. Only parse JSON requests, log error codes and requests when run.
 app.use(express.json());
