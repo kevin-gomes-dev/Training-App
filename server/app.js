@@ -20,7 +20,8 @@ const FOREIGN_KEY_ERROR_CODE = "23503";
 const INDETERMINATE_DATA_TYPE_ERROR_CODE = "42P18";
 
 // For the deployed backend
-app.use(cors({ origin: process.env.API_URL }));
+// app.use(cors({ origin: process.env.API_URL }));
+app.use(cors());
 
 // Important middleware used by all routes. Only parse JSON requests, log error codes and requests when run.
 app.use(express.json());
