@@ -7,12 +7,15 @@ Enter **Staff Step**, an app specializing in enabling communication between trai
 We hope you'll enjoy using this app to expedite and help evolve the potential talent residing within.
 
 **Login**
+
 ![login](images/loginPage.png)
 
 **Dashboard**
+
 ![dashboard](images/dashboardPage.png)
 
 **Messages**
+
 ![messages](images/messagesPage.png)
 
 [Visit us now!](https://staffstep.netlify.app)
