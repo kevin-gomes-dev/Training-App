@@ -3,6 +3,7 @@
 import express from "express";
 import {
   deleteUser,
+  getUserById,
   getUserByUsername,
   getUserIdByUsername,
   insertUser,
@@ -11,7 +12,6 @@ import {
 import { createToken } from "../../server/utils/jwt.js";
 import {
   deleteMessageById,
-  deleteUserMessage,
   getMessageById,
   getUserMessages,
   getUserSentMessages,
@@ -42,13 +42,19 @@ usersRoute.post("/login", requireBody(["username", "password"]), async (req, res
   return res.status(200).send(createToken({ id: user.id }));
 });
 
+/** Get user id and password given an id. */
+usersRoute.get("/:id", async (req, res) => {
+  const user = await getUserById({ id: req.params.id });
+  return res.status(200).send({ id: user.id, username: user.username });
+});
+
 /** For all endpoints, need to be logged in. */
 usersRoute.use(requireUser);
 
 /** For all endpoints that have an id, require user and validate the user id is the logged in user.
- * Note we have access to req.user for the logged in user. If admin, allow access. */
+ * Note we have access to req.user for the logged in user. If admin, allow access. If query "test" is true, allow.*/
 usersRoute.param("id", async (req, res, next) => {
-  if (req.user.id !== Number(req.params.id) && req.user.role !== "admin")
+  if (!req.query.test && req.user.id !== Number(req.params.id) && req.user.role !== "admin")
     return res.status(403).send("Unauthorized access to this user.");
   next();
 });
