@@ -26,7 +26,7 @@ function displayName(userId, nameMap) {
 }
 
 export default function Messages() {
-  const { token, userId, logout } = useAuth();
+  const { userId, logout } = useAuth();
   const navigate = useNavigate();
 
   const [inbox, setInbox] = useState([]);
@@ -49,16 +49,39 @@ export default function Messages() {
     });
   };
 
-  const loadMessages = async () => {
-    setError(null);
+  const loadMessages = async (silent = false) => {
+    if (!silent) setError(null);
     try {
       const [inboxRes, sentRes] = await Promise.all([
         api.get(`/users/${userId}/messages`),
         api.get(`/users/${userId}/messages?sent=true`),
       ]);
-      setInbox(Array.isArray(inboxRes.data) ? inboxRes.data : []);
-      setSent(Array.isArray(sentRes.data) ? sentRes.data : []);
+      const inboxRows = Array.isArray(inboxRes.data) ? inboxRes.data : [];
+      const sentRows = Array.isArray(sentRes.data) ? sentRes.data : [];
+      setInbox(inboxRows);
+      setSent(sentRows);
+
+      const otherIds = new Set();
+      inboxRows.forEach((msg) => msg.from_user_id && otherIds.add(msg.from_user_id));
+      sentRows.forEach((msg) => msg.to_user_id && otherIds.add(msg.to_user_id));
+
+      const nextMap = { ...loadNameMap() };
+      await Promise.all(
+  [...otherIds].map(async (id) => {
+    if (nextMap[id]) return;
+    try {
+      const { data } = await api.get(`/users/${id}?test=true`);
+      if (data?.username) nextMap[id] = data.username;
+    } catch {
+      // keep User #id if this lookup fails
+    }
+  })
+);
+setNameMap(nextMap);
+saveNameMap(nextMap);
+
     } catch (err) {
+      if (!silent)
       setError(err.response?.data || err.message || 'An error has occurred.');
     } finally {
       setLoading(false);
@@ -68,6 +91,10 @@ export default function Messages() {
     useEffect(() => {
     if (!userId) return;
     loadMessages();
+    
+    const intervalId = setInterval(loadMessages, 3000); // Poll every 3 seconds
+
+    return () => clearInterval(intervalId);
     }, [userId]);
   // Build one conversation per other user
   const conversations = useMemo(() => {

@@ -80,6 +80,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setToken(null);
     setError(null);
+    localStorage.clear();
   };
 
   // The value provided by the AuthContext will include the token, authentication status, loading state, error state, 
