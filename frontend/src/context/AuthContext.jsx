@@ -16,7 +16,7 @@ const AuthContext = createContext(null);
 //This is for the page we are protecting. It will check authentication.
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
-  const [username, setUser] = useState (() => localStorage.getItem('username'));
+  const [username, setUsername] = useState (() => localStorage.getItem('username'));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -65,6 +65,7 @@ export function AuthProvider({ children }) {
       const { data } = await api.post('/users/register', body);
       const jwt = typeof data === 'string' ? data : data.token ?? data;
       setToken(jwt);
+      setUsername(username);
       return true;
     } catch (err) {
       const message =
