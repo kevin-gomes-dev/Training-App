@@ -28,6 +28,7 @@ function displayName(userId, nameMap) {
 export default function Messages() {
   const { userId, logout } = useAuth();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [inbox, setInbox] = useState([]);
   const [sent, setSent] = useState([]);
@@ -204,13 +205,35 @@ saveNameMap(nextMap);
     <div className="messages-page">
       <header className="dashboard-header">
         <h1>Messages</h1>
-        <div className="header-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/dashboard')}>
-            Dashboard
+        <div className="menu-wrap">
+          <button
+            className="menu-button"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
           </button>
-          <button className="btn btn-secondary" onClick={handleLogout}>
-            Sign Out
-          </button>
+
+          {menuOpen && (
+            <div className="menu-dropdown">
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate('/dashboard');
+                }}
+              >
+                Dashboard
+              </button>
+              <button onClick={() => {
+                  setMenuOpen(false);
+                  handleLogout();
+                }}>
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
