@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 
 // This component is the main dashboard page that users see after logging in.
 export default function Dashboard() {
-  const { logout, token } = useAuth();
+  const { logout, username } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -25,14 +25,8 @@ export default function Dashboard() {
 
       <main className="dashboard-content">
         <div className="welcome-card">
-          <h2>Welcome!</h2>
-          <p>You are successfully logged in.</p>
-          <p className="token-preview">
-            Token stored: {token ? `${token.slice(0, 20)}...` : 'none'}
-          </p>
-          <p className="hint">
-            This is a placeholder dashboard. Next we can add videos, messages, and role-based views.
-          </p>
+          <h2>Welcome{username ? `, ${username}` : ''}!</h2>
+          <p>You are signed in to the Training App.</p>
         </div>
       </main>
     </div>

@@ -16,18 +16,19 @@ const AuthContext = createContext(null);
 //This is for the page we are protecting. It will check authentication.
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
+  const [username, setUser] = useState (() => localStorage.getItem('username'));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Whenever the token changes, we will update localStorage.
   // This way, the user will stay logged in even if they refresh the page.
   useEffect(() => {
-    if (token) {
-      localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
-    }
-  }, [token]);
+    if (token) localStorage.setItem('token', token);
+    else localStorage.removeItem('token');
+
+    if (username) localStorage.setItem('username', username);
+    else localStorage.removeItem('username');
+  }, [token, username]);
 
   // The login function will call the backend to authenticate the user.
   // If successful, it will store the token in state and localStorage.
@@ -38,6 +39,7 @@ export function AuthProvider({ children }) {
       const { data } = await api.post('/users/login', { username, password });
       const jwt = typeof data === 'string' ? data : data.token ?? data;
       setToken(jwt);
+      setUsername(username);
       return true;
     } catch (err) {
       const message =
@@ -80,6 +82,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setToken(null);
     setError(null);
+    setUsername(null);
     localStorage.clear();
   };
 
@@ -87,6 +90,7 @@ export function AuthProvider({ children }) {
   // and the login, register, and logout functions.
   const value = {
     token,
+    username,
     isAuthenticated: !!token,
     loading,
     error,
